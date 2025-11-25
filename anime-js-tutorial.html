@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime.js Beginner Tutorial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 3em;
+        }
+
+        .section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        /* Animation targets */
+        .box {
+            width: 100px;
+            height: 100px;
+            background: #667eea;
+            margin: 20px 0;
+            border-radius: 10px;
+        }
+
+        .circle {
+            width: 80px;
+            height: 80px;
+            background: #f093fb;
+            border-radius: 50%;
+            margin: 20px;
+            display: inline-block;
+        }
+
+        .text-demo {
+            font-size: 2em;
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .stagger-demo {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .stagger-box {
+            width: 60px;
+            height: 60px;
+            background: #4facfe;
+            border-radius: 8px;
+        }
+
+        .timeline-demo {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .timeline-box {
+            width: 70px;
+            height: 70px;
+            border-radius: 10px;
+        }
+
+        .timeline-box:nth-child(1) { background: #fa709a; }
+        .timeline-box:nth-child(2) { background: #fee140; }
+        .timeline-box:nth-child(3) { background: #30cfd0; }
+
+        .path-demo {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .moving-element {
+            width: 40px;
+            height: 40px;
+            background: #667eea;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .info {
+            background: #e8f4fd;
+            padding: 15px;
+            border-left: 4px solid #2196F3;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">🎨 Anime.js Tutorial</h1>
+
+        <!-- Section 1: Basic Animation -->
+        <div class="section">
+            <h2>1. Basic Animation - Move & Scale</h2>
+            <div class="info">
+                <strong>What's happening:</strong> This box will move right and grow bigger when you click the button.
+            </div>
+            <div class="box" id="box1"></div>
+            <button onclick="animateBox1()">Animate Box</button>
+            <button onclick="resetBox1()">Reset</button>
+        </div>
+
+        <!-- Section 2: Multiple Properties -->
+        <div class="section">
+            <h2>2. Multiple Properties - Color, Rotation, Border</h2>
+            <div class="info">
+                <strong>What's happening:</strong> This demonstrates animating multiple CSS properties at once.
+            </div>
+            <div class="box" id="box2"></div>
+            <button onclick="animateBox2()">Animate Multiple Properties</button>
+        </div>
+
+        <!-- Section 3: Easing Functions -->
+        <div class="section">
+            <h2>3. Easing Functions - Different Movement Styles</h2>
+            <div class="info">
+                <strong>What's happening:</strong> Watch how different easing functions change the animation feel.
+            </div>
+            <div class="circle" id="circle1"></div>
+            <div class="circle" id="circle2"></div>
+            <div class="circle" id="circle3"></div>
+            <br>
+            <button onclick="animateEasing()">Try Different Easings</button>
+        </div>
+
+        <!-- Section 4: Text Animation -->
+        <div class="section">
+            <h2>4. Text Animation - Letter by Letter</h2>
+            <div class="info">
+                <strong>What's happening:</strong> Each letter animates individually creating a wave effect.
+            </div>
+            <div class="text-demo" id="text1">HELLO ANIME.JS!</div>
+            <button onclick="animateText()">Animate Text</button>
+        </div>
+
+        <!-- Section 5: Stagger Animation -->
+        <div class="section">
+            <h2>5. Stagger Animation - Cascading Effect</h2>
+            <div class="info">
+                <strong>What's happening:</strong> Elements animate one after another with a delay between each.
+            </div>
+            <div class="stagger-demo" id="staggerContainer">
+                <div class="stagger-box"></div>
+                <div class="stagger-box"></div>
+                <div class="stagger-box"></div>
+                <div class="stagger-box"></div>
+                <div class="stagger-box"></div>
+                <div class="stagger-box"></div>
+                <div class="stagger-box"></div>
+                <div class="stagger-box"></div>
+            </div>
+            <button onclick="animateStagger()">Stagger Animation</button>
+        </div>
+
+        <!-- Section 6: Timeline -->
+        <div class="section">
+            <h2>6. Timeline - Sequential Animations</h2>
+            <div class="info">
+                <strong>What's happening:</strong> Multiple animations play in sequence using a timeline.
+            </div>
+            <div class="timeline-demo">
+                <div class="timeline-box" id="tl1"></div>
+                <div class="timeline-box" id="tl2"></div>
+                <div class="timeline-box" id="tl3"></div>
+            </div>
+            <button onclick="animateTimeline()">Play Timeline</button>
+        </div>
+
+        <!-- Section 7: Path Animation -->
+        <div class="section">
+            <h2>7. Path Animation - Complex Movement</h2>
+            <div class="info">
+                <strong>What's happening:</strong> Element follows a curved path defined by coordinates.
+            </div>
+            <div class="path-demo">
+                <div class="moving-element" id="pathElement"></div>
+            </div>
+            <button onclick="animatePath()">Follow Path</button>
+        </div>
+
+        <!-- Section 8: Loop & Direction -->
+        <div class="section">
+            <h2>8. Loop & Direction - Continuous Animation</h2>
+            <div class="info">
+                <strong>What's happening:</strong> Animation loops infinitely and alternates direction.
+            </div>
+            <div class="box" id="loopBox"></div>
+            <button onclick="startLoop()">Start Loop</button>
+            <button onclick="stopLoop()">Stop Loop</button>
+        </div>
+    </div>
+
+    <!-- Load anime.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+    <script>
+        // Store animation instances
+        let loopAnimation = null;
+
+        // 1. Basic Animation
+        function animateBox1() {
+            anime({
+                targets: '#box1',
+                translateX: 250,
+                scale: 1.5,
+                duration: 1000,
+                easing: 'easeInOutQuad'
+            });
+        }
+
+        function resetBox1() {
+            anime({
+                targets: '#box1',
+                translateX: 0,
+                scale: 1,
+                duration: 500
+            });
+        }
+
+        // 2. Multiple Properties
+        function animateBox2() {
+            anime({
+                targets: '#box2',
+                translateX: 200,
+                rotate: '1turn',
+                backgroundColor: '#f093fb',
+                borderRadius: ['10px', '50%'],
+                duration: 1500,
+                easing: 'easeInOutExpo'
+            });
+        }
+
+        // 3. Easing Functions
+        function animateEasing() {
+            // Linear easing
+            anime({
+                targets: '#circle1',
+                translateX: 300,
+                duration: 1500,
+                easing: 'linear'
+            });
+
+            // Ease in out
+            anime({
+                targets: '#circle2',
+                translateX: 300,
+                duration: 1500,
+                easing: 'easeInOutQuad'
+            });
+
+            // Bounce
+            anime({
+                targets: '#circle3',
+                translateX: 300,
+                duration: 1500,
+                easing: 'easeOutBounce'
+            });
+        }
+
+        // 4. Text Animation
+        function animateText() {
+            const textElement = document.querySelector('#text1');
+            textElement.innerHTML = textElement.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+            anime.timeline()
+                .add({
+                    targets: '#text1 .letter',
+                    translateY: [-100, 0],
+                    opacity: [0, 1],
+                    easing: "easeOutExpo",
+                    duration: 1400,
+                    delay: (el, i) => 50 * i
+                });
+        }
+
+        // 5. Stagger Animation
+        function animateStagger() {
+            anime({
+                targets: '.stagger-box',
+                translateY: -50,
+                scale: [0.8, 1.2, 1],
+                rotate: 360,
+                backgroundColor: [
+                    { value: '#f093fb' },
+                    { value: '#4facfe' }
+                ],
+                duration: 1000,
+                delay: anime.stagger(100), // delay increases by 100ms for each element
+                easing: 'easeInOutQuad'
+            });
+        }
+
+        // 6. Timeline
+        function animateTimeline() {
+            const tl = anime.timeline({
+                easing: 'easeOutExpo',
+                duration: 750
+            });
+
+            tl.add({
+                targets: '#tl1',
+                translateY: -80,
+                rotate: 180
+            })
+            .add({
+                targets: '#tl2',
+                translateY: -80,
+                rotate: 180
+            }, '-=500') // Start 500ms before previous animation ends
+            .add({
+                targets: '#tl3',
+                translateY: -80,
+                rotate: 180
+            }, '-=500');
+        }
+
+        // 7. Path Animation
+        function animatePath() {
+            const path = anime.path('M 0 100 Q 150 0 300 100 T 600 100');
+            
+            anime({
+                targets: '#pathElement',
+                translateX: path('x'),
+                translateY: path('y'),
+                rotate: path('angle'),
+                duration: 3000,
+                easing: 'linear',
+                loop: false
+            });
+        }
+
+        // 8. Loop Animation
+        function startLoop() {
+            loopAnimation = anime({
+                targets: '#loopBox',
+                translateX: 250,
+                backgroundColor: ['#667eea', '#764ba2'],
+                duration: 1000,
+                direction: 'alternate',
+                loop: true,
+                easing: 'easeInOutSine'
+            });
+        }
+
+        function stopLoop() {
+            if (loopAnimation) {
+                loopAnimation.pause();
+            }
+        }
+
+        // Animate title on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            anime({
+                targets: '.main-title',
+                translateY: [-50, 0],
+                opacity: [0, 1],
+                duration: 1000,
+                easing: 'easeOutExpo'
+            });
+        });
+    </script>
+</body>
+</html>
