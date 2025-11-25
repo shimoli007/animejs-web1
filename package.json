@@ -1,0 +1,23 @@
+{
+  "name": "cynea-ai-website",
+  "version": "1.0.0",
+  "description": "Cynea AI - Responsive website with AI & Blockchain solutions for SMEs",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx live-server --port=3000 --open=index.html --watch=.",
+    "start": "npx http-server -p 3000 -o",
+    "serve": "python3 -m http.server 3000"
+  },
+  "keywords": [
+    "cynea",
+    "ai",
+    "blockchain",
+    "sme",
+    "responsive",
+    "website"
+  ],
+  "author": "Cynea AI",
+  "license": "ISC",
+  "devDependencies": {},
+  "dependencies": {}
+}
