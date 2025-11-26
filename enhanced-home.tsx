@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { GraduationCap, Database, Bot, Link2, DollarSign, BarChart3, ArrowRight, TrendingUp, Users, Globe } from 'lucide-react';
+import { GraduationCap, Database, Bot, Link2, DollarSign, BarChart3, ArrowRight, TrendingUp, Users, Globe, Sparkles } from 'lucide-react';
 
 export function EnhancedHome() {
   const infrastructureStack = [
@@ -7,7 +7,7 @@ export function EnhancedHome() {
       title: 'Train',
       description: 'Comprehensive AI readiness programs for officials and SME staff',
       icon: GraduationCap,
-      color: 'var(--teal)',
+      color: 'var(--purple-accent)',
       link: '/training/b2b',
       features: ['Career Growth', 'Corporate Training', 'Public Sector']
     },
@@ -15,7 +15,7 @@ export function EnhancedHome() {
       title: 'Digitize',
       description: 'Transform analog operations into streamlined digital systems',
       icon: Database,
-      color: 'var(--blue)',
+      color: 'var(--gold-accent)',
       link: '/products/ai-automation',
       features: ['Data Migration', 'Cloud Infrastructure', 'Digital Workflows']
     },
@@ -23,7 +23,7 @@ export function EnhancedHome() {
       title: 'Automate',
       description: 'Deploy AI agents to handle repetitive tasks and workflows',
       icon: Bot,
-      color: 'var(--purple)',
+      color: 'var(--purple-deep)',
       link: '/products/ai-automation',
       features: ['AI Agents', 'Workflow Automation', 'Process Optimization']
     },
@@ -31,7 +31,7 @@ export function EnhancedHome() {
       title: 'Trace',
       description: 'Blockchain-powered supply chain transparency and compliance',
       icon: Link2,
-      color: 'var(--teal)',
+      color: 'var(--gold-accent)',
       link: '/products/blockchain-compliance',
       features: ['Supply Chain Tracking', 'EUDR Compliance', 'ESG Reporting']
     },
@@ -39,7 +39,7 @@ export function EnhancedHome() {
       title: 'Finance',
       description: 'Access stablecoin payments and digital finance solutions',
       icon: DollarSign,
-      color: 'var(--blue)',
+      color: 'var(--purple-accent)',
       link: '/products/digital-finance',
       features: ['Stablecoin Payments', 'Digital Wallets', 'Cross-Border Transactions']
     },
@@ -47,7 +47,7 @@ export function EnhancedHome() {
       title: 'Monetize',
       description: 'Transform business data into actionable insights and revenue',
       icon: BarChart3,
-      color: 'var(--purple)',
+      color: 'var(--purple-deep)',
       link: '/products/data-analytics',
       features: ['Data Analytics', 'Insights Marketplace', 'Revenue Optimization']
     }
@@ -61,89 +61,50 @@ export function EnhancedHome() {
   ];
 
   return (
-    <div style={{ backgroundColor: 'var(--white)' }}>
-      {/* Hero Section */}
-      <section style={{ padding: 'var(--space-32) 0 var(--space-24) 0', backgroundColor: 'var(--off-white)' }}>
+    <div className="home-page">
+      {/* Hero Section - Striking & Attention-Grabbing */}
+      <section className="hero-section">
         <div className="container">
-          <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-            <div
-              className="hero-badge"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 'var(--space-2)',
-                padding: 'var(--space-2) var(--space-4)',
-                backgroundColor: 'var(--teal)',
-                color: 'white',
-                borderRadius: 'var(--radius-lg)',
-                fontSize: 'var(--text-sm)',
-                fontWeight: '600',
-                marginBottom: 'var(--space-6)',
-                letterSpacing: '0.05em',
-                textTransform: 'uppercase'
-              }}
-            >
-              <TrendingUp size={16} />
+          <div className="hero-content">
+            <div className="hero-badge">
+              <Sparkles size={16} />
               AI & Blockchain Infrastructure for Emerging Markets
             </div>
 
-            <h1
-              className="hero-title"
-              style={{
-                fontSize: 'clamp(2.5rem, 5vw, 3.5rem)',
-                fontWeight: '800',
-                color: 'var(--navy-dark)',
-                lineHeight: '1.1',
-                marginBottom: 'var(--space-6)',
-                letterSpacing: '-0.02em'
-              }}
-            >
+            <h1 className="hero-title">
               Empower Your SME with{' '}
-              <span style={{ color: 'var(--teal)' }}>AI & Blockchain</span>
+              <span className="hero-highlight">AI & Blockchain</span>
             </h1>
 
-            <p
-              className="hero-description"
-              style={{
-                fontSize: 'var(--text-xl)',
-                color: 'var(--dark-gray)',
-                lineHeight: '1.7',
-                marginBottom: 'var(--space-10)',
-                maxWidth: '700px',
-                margin: '0 auto var(--space-10) auto'
-              }}
-            >
-              Complete infrastructure stack for emerging market SMEs. Train your team, digitize operations, automate workflows, trace products, access digital finance, and monetize your data.
+            <p className="hero-description">
+              Complete infrastructure stack for emerging market SMEs. Train your team, digitize operations, automate workflows, trace products, access digital finance, and monetize your data—all in one platform.
             </p>
 
-            <div className="hero-cta" style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div className="hero-cta">
               <Link to="/contact" className="btn btn-primary btn-lg">
                 Get Started
                 <ArrowRight size={20} />
               </Link>
-              <Link
-                to="/use-cases"
-                className="btn btn-secondary btn-lg"
-              >
+              <Link to="/use-cases" className="btn btn-secondary btn-lg">
                 View Use Cases
               </Link>
             </div>
 
             {/* Trust Indicators */}
-            <div style={{ marginTop: 'var(--space-12)', display: 'flex', gap: 'var(--space-12)', justifyContent: 'center', flexWrap: 'wrap', fontSize: 'var(--text-sm)', color: 'var(--gray)' }}>
-              <div>
-                <div style={{ fontWeight: '600', color: 'var(--navy-dark)', fontSize: 'var(--text-lg)' }}>200+</div>
-                <div>Officials Trained</div>
+            <div className="trust-indicators">
+              <div className="trust-item">
+                <div className="trust-value">200+</div>
+                <div className="trust-label">Officials Trained</div>
               </div>
-              <div style={{ width: '1px', backgroundColor: 'var(--light-gray)' }}></div>
-              <div>
-                <div style={{ fontWeight: '600', color: 'var(--navy-dark)', fontSize: 'var(--text-lg)' }}>100+</div>
-                <div>SMEs Supported</div>
+              <div className="trust-divider"></div>
+              <div className="trust-item">
+                <div className="trust-value">100+</div>
+                <div className="trust-label">SMEs Supported</div>
               </div>
-              <div style={{ width: '1px', backgroundColor: 'var(--light-gray)' }}></div>
-              <div>
-                <div style={{ fontWeight: '600', color: 'var(--navy-dark)', fontSize: 'var(--text-lg)' }}>5</div>
-                <div>Active Countries</div>
+              <div className="trust-divider"></div>
+              <div className="trust-item">
+                <div className="trust-value">5</div>
+                <div className="trust-label">Active Countries</div>
               </div>
             </div>
           </div>
@@ -151,97 +112,42 @@ export function EnhancedHome() {
       </section>
 
       {/* Infrastructure Stack Section */}
-      <section style={{ padding: 'var(--space-24) 0' }}>
+      <section className="infrastructure-section">
         <div className="container">
-          <div className="text-center max-w-3xl" style={{ marginBottom: 'var(--space-16)' }}>
-            <h2 style={{ fontSize: 'var(--text-4xl)', fontWeight: '800', color: 'var(--navy-dark)', marginBottom: 'var(--space-4)' }}>
-              Complete Infrastructure Stack
-            </h2>
-            <p style={{ fontSize: 'var(--text-lg)', color: 'var(--dark-gray)', lineHeight: '1.7' }}>
+          <div className="section-header">
+            <h2 className="section-title">Complete Infrastructure Stack</h2>
+            <p className="section-description">
               Everything your business needs to compete globally—from training to digitization, automation, traceability, finance, and monetization
             </p>
           </div>
 
-          <div className="grid grid-cols-1" style={{ gap: 'var(--space-8)' }}>
-            {infrastructureStack.map((item, index) => {
+          <div className="infrastructure-grid">
+            {infrastructureStack.map((item) => {
               const Icon = item.icon;
               return (
-                <div
-                  key={item.title}
-                  className="card"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '1fr',
-                    gap: 'var(--space-6)',
-                    alignItems: 'start'
-                  }}
-                >
-                  <div style={{ display: 'flex', gap: 'var(--space-6)', alignItems: 'start' }}>
-                    <div
-                      style={{
-                        width: '64px',
-                        height: '64px',
-                        backgroundColor: item.color,
-                        borderRadius: 'var(--radius-xl)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        color: 'white'
-                      }}
-                    >
+                <div key={item.title} className="infrastructure-card card">
+                  <div className="card-icon-wrapper">
+                    <div className="card-icon" style={{ backgroundColor: item.color }}>
                       <Icon size={32} />
                     </div>
+                  </div>
 
-                    <div style={{ flex: 1 }}>
-                      <h3 style={{ fontSize: 'var(--text-2xl)', fontWeight: '700', color: 'var(--navy-dark)', marginBottom: 'var(--space-3)' }}>
-                        {item.title}
-                      </h3>
-                      <p style={{ fontSize: 'var(--text-lg)', color: 'var(--dark-gray)', lineHeight: '1.7', marginBottom: 'var(--space-4)' }}>
-                        {item.description}
-                      </p>
+                  <div className="card-content">
+                    <h3 className="card-title">{item.title}</h3>
+                    <p className="card-description">{item.description}</p>
 
-                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', marginBottom: 'var(--space-4)' }}>
-                        {item.features.map((feature) => (
-                          <span
-                            key={feature}
-                            style={{
-                              padding: 'var(--space-1) var(--space-3)',
-                              backgroundColor: 'var(--light-gray)',
-                              borderRadius: 'var(--radius-md)',
-                              fontSize: 'var(--text-sm)',
-                              color: 'var(--navy-dark)',
-                              fontWeight: '500'
-                            }}
-                          >
-                            {feature}
-                          </span>
-                        ))}
-                      </div>
-
-                      <Link
-                        to={item.link}
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: 'var(--space-2)',
-                          color: 'var(--teal)',
-                          fontWeight: '600',
-                          fontSize: 'var(--text-base)',
-                          textDecoration: 'none',
-                          transition: 'gap var(--transition-fast)'
-                        }}
-                        onMouseOver={(e) => {
-                          e.currentTarget.style.gap = 'var(--space-3)';
-                        }}
-                        onMouseOut={(e) => {
-                          e.currentTarget.style.gap = 'var(--space-2)';
-                        }}
-                      >
-                        Learn More
-                        <ArrowRight size={16} />
-                      </Link>
+                    <div className="card-features">
+                      {item.features.map((feature) => (
+                        <span key={feature} className="feature-tag">
+                          {feature}
+                        </span>
+                      ))}
                     </div>
+
+                    <Link to={item.link} className="card-link">
+                      Learn More
+                      <ArrowRight size={16} />
+                    </Link>
                   </div>
                 </div>
               );
@@ -251,56 +157,21 @@ export function EnhancedHome() {
       </section>
 
       {/* Stats Section */}
-      <section style={{ padding: 'var(--space-24) 0', backgroundColor: 'var(--navy-dark)', color: 'white' }}>
+      <section className="stats-section bg-navy">
         <div className="container">
-          <div className="grid grid-cols-1" style={{ gap: 'var(--space-8)' }}>
+          <div className="stats-grid">
             {stats.map((stat) => {
               const Icon = stat.icon;
               return (
-                <div
-                  key={stat.label}
-                  style={{
-                    textAlign: 'center',
-                    padding: 'var(--space-8)',
-                    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-                    borderRadius: 'var(--radius-xl)',
-                    border: '1px solid rgba(255, 255, 255, 0.1)'
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 'var(--space-4)' }}>
-                    <div
-                      style={{
-                        width: '56px',
-                        height: '56px',
-                        backgroundColor: 'var(--teal)',
-                        borderRadius: 'var(--radius-lg)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center'
-                      }}
-                    >
+                <div key={stat.label} className="stat-card">
+                  <div className="stat-icon-wrapper">
+                    <div className="stat-icon">
                       <Icon size={28} />
                     </div>
                   </div>
-                  <div
-                    className="stat-number"
-                    data-value={stat.value.replace(/[^0-9]/g, '')}
-                    style={{
-                      fontSize: 'var(--text-6xl)',
-                      fontWeight: '800',
-                      color: 'white',
-                      marginBottom: 'var(--space-2)',
-                      lineHeight: 1
-                    }}
-                  >
-                    {stat.value}
-                  </div>
-                  <div style={{ fontSize: 'var(--text-xl)', fontWeight: '600', marginBottom: 'var(--space-2)' }}>
-                    {stat.label}
-                  </div>
-                  <div style={{ fontSize: 'var(--text-base)', color: 'rgba(255, 255, 255, 0.7)' }}>
-                    {stat.description}
-                  </div>
+                  <div className="stat-value">{stat.value}</div>
+                  <div className="stat-label">{stat.label}</div>
+                  <div className="stat-description">{stat.description}</div>
                 </div>
               );
             })}
@@ -309,16 +180,14 @@ export function EnhancedHome() {
       </section>
 
       {/* CTA Section */}
-      <section style={{ padding: 'var(--space-24) 0', backgroundColor: 'var(--light-gray)' }}>
+      <section className="cta-section">
         <div className="container">
-          <div className="max-w-4xl" style={{ textAlign: 'center' }}>
-            <h2 style={{ fontSize: 'var(--text-4xl)', fontWeight: '800', color: 'var(--navy-dark)', marginBottom: 'var(--space-6)' }}>
-              Ready to Transform Your Business?
-            </h2>
-            <p style={{ fontSize: 'var(--text-xl)', color: 'var(--dark-gray)', lineHeight: '1.7', marginBottom: 'var(--space-10)' }}>
+          <div className="cta-content">
+            <h2 className="cta-title">Ready to Transform Your Business?</h2>
+            <p className="cta-description">
               Join the SMEs, governments, and enterprises already building the future with Cynea AI. Get started today with a free consultation.
             </p>
-            <div style={{ display: 'flex', gap: 'var(--space-4)', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div className="cta-buttons">
               <Link to="/contact" className="btn btn-primary btn-lg">
                 Schedule a Demo
                 <ArrowRight size={20} />
@@ -332,15 +201,371 @@ export function EnhancedHome() {
       </section>
 
       <style>{`
+        /* Hero Section - Striking & Modern */
+        .hero-section {
+          padding: var(--space-32) 0 var(--space-28) 0;
+          background: linear-gradient(135deg, var(--navy-primary) 0%, var(--navy-light) 50%, #0A2F5F 100%);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero-section::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(236, 165, 46, 0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          pointer-events: none;
+        }
+
+        .hero-section::after {
+          content: '';
+          position: absolute;
+          bottom: -200px;
+          left: -100px;
+          width: 500px;
+          height: 500px;
+          background: radial-gradient(circle, rgba(147, 51, 234, 0.15) 0%, transparent 70%);
+          border-radius: 50%;
+          pointer-events: none;
+        }
+
+        .hero-content {
+          max-width: 900px;
+          margin: 0 auto;
+          text-align: center;
+          position: relative;
+          z-index: 1;
+        }
+
+        .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-2);
+          padding: var(--space-3) var(--space-6);
+          background: linear-gradient(135deg, var(--gold-accent) 0%, #fdb241 100%);
+          color: var(--white);
+          border-radius: var(--radius-full);
+          font-size: var(--text-sm);
+          font-weight: 700;
+          margin-bottom: var(--space-8);
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          box-shadow: 0 4px 20px rgba(236, 165, 46, 0.4);
+          animation: fadeInUp 0.6s ease-out;
+        }
+
+        .hero-title {
+          font-size: clamp(2.5rem, 5vw, 4rem);
+          font-weight: 900;
+          color: var(--white);
+          line-height: 1.1;
+          margin-bottom: var(--space-8);
+          letter-spacing: -0.02em;
+          animation: fadeInUp 0.6s ease-out 0.1s backwards;
+        }
+
+        .hero-highlight {
+          background: linear-gradient(135deg, var(--gold-accent) 0%, #fdb241 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .hero-description {
+          font-size: var(--text-xl);
+          color: rgba(255, 255, 255, 0.9);
+          line-height: 1.8;
+          margin-bottom: var(--space-12);
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
+          animation: fadeInUp 0.6s ease-out 0.2s backwards;
+        }
+
+        .hero-cta {
+          display: flex;
+          gap: var(--space-4);
+          justify-content: center;
+          flex-wrap: wrap;
+          margin-bottom: var(--space-16);
+          animation: fadeInUp 0.6s ease-out 0.3s backwards;
+        }
+
+        .trust-indicators {
+          display: flex;
+          gap: var(--space-12);
+          justify-content: center;
+          flex-wrap: wrap;
+          padding-top: var(--space-8);
+          border-top: 1px solid rgba(255, 255, 255, 0.15);
+          animation: fadeIn 0.8s ease-out 0.5s backwards;
+        }
+
+        .trust-item {
+          text-align: center;
+        }
+
+        .trust-value {
+          font-weight: 800;
+          color: var(--gold-accent);
+          font-size: var(--text-3xl);
+          line-height: 1;
+          margin-bottom: var(--space-2);
+        }
+
+        .trust-label {
+          font-size: var(--text-sm);
+          color: rgba(255, 255, 255, 0.8);
+          font-weight: 600;
+        }
+
+        .trust-divider {
+          width: 1px;
+          background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Infrastructure Section */
+        .infrastructure-section {
+          padding: var(--space-28) 0;
+          background-color: var(--white);
+        }
+
+        .section-header {
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto var(--space-16) auto;
+        }
+
+        .section-title {
+          font-size: var(--text-5xl);
+          font-weight: 900;
+          color: var(--navy-primary);
+          margin-bottom: var(--space-6);
+          letter-spacing: -0.02em;
+        }
+
+        .section-description {
+          font-size: var(--text-xl);
+          color: var(--dark-gray);
+          line-height: 1.8;
+        }
+
+        .infrastructure-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-8);
+        }
+
         @media (min-width: 768px) {
-          .grid-cols-2 {
+          .infrastructure-grid {
             grid-template-columns: repeat(2, 1fr);
           }
         }
 
         @media (min-width: 1024px) {
-          .grid-cols-3 {
+          .infrastructure-grid {
             grid-template-columns: repeat(3, 1fr);
+          }
+        }
+
+        .infrastructure-card {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+        }
+
+        .card-icon-wrapper {
+          margin-bottom: var(--space-6);
+        }
+
+        .card-icon {
+          width: 72px;
+          height: 72px;
+          border-radius: var(--radius-2xl);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--white);
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-content {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .card-title {
+          font-size: var(--text-2xl);
+          font-weight: 800;
+          color: var(--navy-primary);
+          margin-bottom: var(--space-4);
+        }
+
+        .card-description {
+          font-size: var(--text-lg);
+          color: var(--dark-gray);
+          line-height: 1.7;
+          margin-bottom: var(--space-5);
+          flex: 1;
+        }
+
+        .card-features {
+          display: flex;
+          flex-wrap: wrap;
+          gap: var(--space-2);
+          margin-bottom: var(--space-5);
+        }
+
+        .card-link {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--space-2);
+          color: var(--gold-accent);
+          font-weight: 700;
+          font-size: var(--text-base);
+          text-decoration: none;
+          transition: gap var(--transition-fast);
+        }
+
+        .card-link:hover {
+          gap: var(--space-3);
+        }
+
+        /* Stats Section */
+        .stats-section {
+          padding: var(--space-28) 0;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: var(--space-8);
+        }
+
+        @media (min-width: 768px) {
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+
+        @media (min-width: 1024px) {
+          .stats-grid {
+            grid-template-columns: repeat(4, 1fr);
+          }
+        }
+
+        .stat-card {
+          text-align: center;
+          padding: var(--space-10);
+          background-color: rgba(255, 255, 255, 0.05);
+          border-radius: var(--radius-2xl);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          transition: all var(--transition-base);
+        }
+
+        .stat-card:hover {
+          transform: translateY(-8px);
+          background-color: rgba(255, 255, 255, 0.08);
+          border-color: rgba(236, 165, 46, 0.3);
+        }
+
+        .stat-icon-wrapper {
+          display: flex;
+          justify-content: center;
+          margin-bottom: var(--space-5);
+        }
+
+        .stat-icon {
+          width: 64px;
+          height: 64px;
+          background: linear-gradient(135deg, var(--gold-accent) 0%, #fdb241 100%);
+          border-radius: var(--radius-xl);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--white);
+          box-shadow: 0 4px 16px rgba(236, 165, 46, 0.4);
+        }
+
+        .stat-value {
+          font-size: var(--text-6xl);
+          font-weight: 900;
+          color: var(--white);
+          margin-bottom: var(--space-3);
+          line-height: 1;
+        }
+
+        .stat-label {
+          font-size: var(--text-xl);
+          font-weight: 700;
+          color: var(--white);
+          margin-bottom: var(--space-2);
+        }
+
+        .stat-description {
+          font-size: var(--text-base);
+          color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* CTA Section */
+        .cta-section {
+          padding: var(--space-28) 0;
+          background-color: var(--off-white);
+        }
+
+        .cta-content {
+          text-align: center;
+          max-width: 800px;
+          margin: 0 auto;
+        }
+
+        .cta-title {
+          font-size: var(--text-5xl);
+          font-weight: 900;
+          color: var(--navy-primary);
+          margin-bottom: var(--space-6);
+          letter-spacing: -0.02em;
+        }
+
+        .cta-description {
+          font-size: var(--text-xl);
+          color: var(--dark-gray);
+          line-height: 1.8;
+          margin-bottom: var(--space-10);
+        }
+
+        .cta-buttons {
+          display: flex;
+          gap: var(--space-4);
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+          .hero-section {
+            padding: var(--space-24) 0 var(--space-20) 0;
+          }
+
+          .hero-title {
+            font-size: var(--text-4xl);
+          }
+
+          .hero-description {
+            font-size: var(--text-lg);
+          }
+
+          .section-title, .cta-title {
+            font-size: var(--text-3xl);
+          }
+
+          .trust-indicators {
+            gap: var(--space-8);
           }
         }
       `}</style>

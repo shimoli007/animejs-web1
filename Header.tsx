@@ -5,7 +5,6 @@ import { Menu, X, ChevronDown } from 'lucide-react';
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,300 +36,89 @@ export function Header() {
   return (
     <>
       <header
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 50,
-          backgroundColor: 'var(--white)',
-          boxShadow: isScrolled ? 'var(--shadow-md)' : 'none',
-          transition: 'box-shadow var(--transition-base)',
-          borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
-        }}
+        className={`header ${isScrolled ? 'scrolled' : ''}`}
       >
         <div className="container">
-          <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 0' }}>
+          <nav className="nav-container">
             {/* Logo */}
-            <Link
-              to="/"
-              style={{
-                fontSize: '1.5rem',
-                fontWeight: '800',
-                color: 'var(--navy-dark)',
-                textDecoration: 'none',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.625rem'
-              }}
-            >
-              <span style={{
-                background: 'var(--teal)',
-                color: 'white',
-                padding: '0.5rem 0.875rem',
-                borderRadius: 'var(--radius-md)',
-                fontWeight: '800',
-                lineHeight: 1
-              }}>
-                C
-              </span>
-              <span>Cynea AI</span>
+            <Link to="/" className="logo">
+              <span className="logo-icon">C</span>
+              <span className="logo-text">Cynea AI</span>
             </Link>
 
             {/* Desktop Navigation */}
-            <ul
-              className="desktop-nav"
-              style={{
-                display: 'none',
-                alignItems: 'center',
-                gap: '2rem',
-                listStyle: 'none',
-                margin: 0,
-                padding: 0
-              }}
-            >
+            <ul className="desktop-nav nav-list">
               {/* Products Dropdown */}
-              <li
-                style={{ position: 'relative' }}
-                onMouseEnter={() => setActiveDropdown('products')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                    fontSize: 'var(--text-base)',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: '0.5rem',
-                    transition: 'color var(--transition-fast)'
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
-                >
+              <li className="nav-item dropdown">
+                <button className="nav-button">
                   Products
                   <ChevronDown size={16} />
                 </button>
-                {activeDropdown === 'products' && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      marginTop: '0.5rem',
-                      minWidth: '280px',
-                      backgroundColor: 'white',
-                      borderRadius: 'var(--radius-lg)',
-                      boxShadow: 'var(--shadow-xl)',
-                      padding: '0.5rem',
-                      border: '1px solid rgba(0, 0, 0, 0.05)'
-                    }}
-                  >
-                    {productsMenu.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        style={{
-                          display: 'block',
-                          padding: '0.75rem 1rem',
-                          fontSize: 'var(--text-base)',
-                          color: 'var(--navy-dark)',
-                          borderRadius: 'var(--radius-md)',
-                          transition: 'background-color var(--transition-fast)',
-                          textDecoration: 'none'
-                        }}
-                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--light-gray)')}
-                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <div className="dropdown-menu">
+                  {productsMenu.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className="dropdown-item"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </li>
 
               {/* AI Training Dropdown */}
-              <li
-                style={{ position: 'relative' }}
-                onMouseEnter={() => setActiveDropdown('training')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                    fontSize: 'var(--text-base)',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: '0.5rem',
-                    transition: 'color var(--transition-fast)'
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
-                >
+              <li className="nav-item dropdown">
+                <button className="nav-button">
                   AI Training
                   <ChevronDown size={16} />
                 </button>
-                {activeDropdown === 'training' && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      marginTop: '0.5rem',
-                      minWidth: '260px',
-                      backgroundColor: 'white',
-                      borderRadius: 'var(--radius-lg)',
-                      boxShadow: 'var(--shadow-xl)',
-                      padding: '0.5rem',
-                      border: '1px solid rgba(0, 0, 0, 0.05)'
-                    }}
-                  >
-                    {trainingMenu.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        style={{
-                          display: 'block',
-                          padding: '0.75rem 1rem',
-                          fontSize: 'var(--text-base)',
-                          color: 'var(--navy-dark)',
-                          borderRadius: 'var(--radius-md)',
-                          transition: 'background-color var(--transition-fast)',
-                          textDecoration: 'none'
-                        }}
-                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--light-gray)')}
-                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <div className="dropdown-menu">
+                  {trainingMenu.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className="dropdown-item"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </li>
 
               {/* Impact Dropdown */}
-              <li
-                style={{ position: 'relative' }}
-                onMouseEnter={() => setActiveDropdown('impact')}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.25rem',
-                    fontSize: 'var(--text-base)',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    background: 'none',
-                    border: 'none',
-                    cursor: 'pointer',
-                    padding: '0.5rem',
-                    transition: 'color var(--transition-fast)'
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
-                >
+              <li className="nav-item dropdown">
+                <button className="nav-button">
                   Impact
                   <ChevronDown size={16} />
                 </button>
-                {activeDropdown === 'impact' && (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      top: '100%',
-                      left: 0,
-                      marginTop: '0.5rem',
-                      minWidth: '200px',
-                      backgroundColor: 'white',
-                      borderRadius: 'var(--radius-lg)',
-                      boxShadow: 'var(--shadow-xl)',
-                      padding: '0.5rem',
-                      border: '1px solid rgba(0, 0, 0, 0.05)'
-                    }}
-                  >
-                    {impactMenu.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        style={{
-                          display: 'block',
-                          padding: '0.75rem 1rem',
-                          fontSize: 'var(--text-base)',
-                          color: 'var(--navy-dark)',
-                          borderRadius: 'var(--radius-md)',
-                          transition: 'background-color var(--transition-fast)',
-                          textDecoration: 'none'
-                        }}
-                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--light-gray)')}
-                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
+                <div className="dropdown-menu">
+                  {impactMenu.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className="dropdown-item"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
               </li>
 
-              <li>
-                <Link
-                  to="/use-cases"
-                  style={{
-                    fontSize: 'var(--text-base)',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    padding: '0.5rem',
-                    textDecoration: 'none',
-                    transition: 'color var(--transition-fast)'
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
-                >
+              <li className="nav-item">
+                <Link to="/use-cases" className="nav-link">
                   Use Cases
                 </Link>
               </li>
 
-              <li>
-                <Link
-                  to="/resources"
-                  style={{
-                    fontSize: 'var(--text-base)',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    padding: '0.5rem',
-                    textDecoration: 'none',
-                    transition: 'color var(--transition-fast)'
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
-                >
+              <li className="nav-item">
+                <Link to="/resources" className="nav-link">
                   Resources
                 </Link>
               </li>
 
-              <li>
-                <Link
-                  to="/about"
-                  style={{
-                    fontSize: 'var(--text-base)',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    padding: '0.5rem',
-                    textDecoration: 'none',
-                    transition: 'color var(--transition-fast)'
-                  }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
-                >
+              <li className="nav-item">
+                <Link to="/about" className="nav-link">
                   About
                 </Link>
               </li>
@@ -347,14 +135,6 @@ export function Header() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="mobile-menu-btn"
-              style={{
-                display: 'block',
-                padding: '0.5rem',
-                background: 'none',
-                border: 'none',
-                cursor: 'pointer',
-                color: 'var(--navy-dark)'
-              }}
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -363,68 +143,44 @@ export function Header() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-            <div className="mobile-menu" style={{ paddingBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                <div style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', borderTop: '1px solid var(--light-gray)' }}>
-                  <div style={{ fontWeight: '600', color: 'var(--gray)', fontSize: 'var(--text-sm)', padding: '0.5rem 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    Products
-                  </div>
+            <div className="mobile-menu">
+              <div className="mobile-menu-content">
+                <div className="mobile-section">
+                  <div className="mobile-section-header">Products</div>
                   {productsMenu.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
                       onClick={() => setMobileMenuOpen(false)}
-                      style={{
-                        display: 'block',
-                        padding: '0.75rem 0 0.75rem 1rem',
-                        color: 'var(--navy-dark)',
-                        textDecoration: 'none',
-                        fontSize: 'var(--text-base)'
-                      }}
+                      className="mobile-link mobile-link-indent"
                     >
                       {item.name}
                     </Link>
                   ))}
                 </div>
 
-                <div style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', borderTop: '1px solid var(--light-gray)' }}>
-                  <div style={{ fontWeight: '600', color: 'var(--gray)', fontSize: 'var(--text-sm)', padding: '0.5rem 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    AI Training
-                  </div>
+                <div className="mobile-section">
+                  <div className="mobile-section-header">AI Training</div>
                   {trainingMenu.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
                       onClick={() => setMobileMenuOpen(false)}
-                      style={{
-                        display: 'block',
-                        padding: '0.75rem 0 0.75rem 1rem',
-                        color: 'var(--navy-dark)',
-                        textDecoration: 'none',
-                        fontSize: 'var(--text-base)'
-                      }}
+                      className="mobile-link mobile-link-indent"
                     >
                       {item.name}
                     </Link>
                   ))}
                 </div>
 
-                <div style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', borderTop: '1px solid var(--light-gray)' }}>
-                  <div style={{ fontWeight: '600', color: 'var(--gray)', fontSize: 'var(--text-sm)', padding: '0.5rem 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    Impact
-                  </div>
+                <div className="mobile-section">
+                  <div className="mobile-section-header">Impact</div>
                   {impactMenu.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
                       onClick={() => setMobileMenuOpen(false)}
-                      style={{
-                        display: 'block',
-                        padding: '0.75rem 0 0.75rem 1rem',
-                        color: 'var(--navy-dark)',
-                        textDecoration: 'none',
-                        fontSize: 'var(--text-base)'
-                      }}
+                      className="mobile-link mobile-link-indent"
                     >
                       {item.name}
                     </Link>
@@ -434,15 +190,7 @@ export function Header() {
                 <Link
                   to="/use-cases"
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    display: 'block',
-                    padding: '0.75rem 0',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    textDecoration: 'none',
-                    borderTop: '1px solid var(--light-gray)',
-                    fontSize: 'var(--text-base)'
-                  }}
+                  className="mobile-link mobile-link-main"
                 >
                   Use Cases
                 </Link>
@@ -450,14 +198,7 @@ export function Header() {
                 <Link
                   to="/resources"
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    display: 'block',
-                    padding: '0.75rem 0',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    textDecoration: 'none',
-                    fontSize: 'var(--text-base)'
-                  }}
+                  className="mobile-link mobile-link-main"
                 >
                   Resources
                 </Link>
@@ -465,14 +206,7 @@ export function Header() {
                 <Link
                   to="/about"
                   onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    display: 'block',
-                    padding: '0.75rem 0',
-                    fontWeight: '500',
-                    color: 'var(--navy-dark)',
-                    textDecoration: 'none',
-                    fontSize: 'var(--text-base)'
-                  }}
+                  className="mobile-link mobile-link-main"
                 >
                   About
                 </Link>
@@ -480,8 +214,7 @@ export function Header() {
                 <Link
                   to="/contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="btn btn-primary"
-                  style={{ marginTop: '1rem', width: '100%', textAlign: 'center' }}
+                  className="btn btn-primary mobile-cta"
                 >
                   Get Started
                 </Link>
@@ -495,6 +228,223 @@ export function Header() {
       <div style={{ height: '80px' }}></div>
 
       <style>{`
+        /* Header Styles - Optimized for Performance */
+        .header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          z-index: 50;
+          background-color: var(--white);
+          transition: box-shadow var(--transition-base);
+          border-bottom: 1px solid rgba(7, 32, 72, 0.05);
+        }
+
+        .header.scrolled {
+          box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 1.25rem 0;
+        }
+
+        /* Logo Styles */
+        .logo {
+          display: flex;
+          align-items: center;
+          gap: 0.625rem;
+          font-size: 1.5rem;
+          font-weight: 800;
+          color: var(--navy-primary);
+          text-decoration: none;
+        }
+
+        .logo-icon {
+          background: linear-gradient(135deg, var(--gold-accent) 0%, #d89419 100%);
+          color: white;
+          padding: 0.5rem 0.875rem;
+          border-radius: var(--radius-md);
+          font-weight: 800;
+          line-height: 1;
+          box-shadow: 0 2px 8px rgba(236, 165, 46, 0.3);
+        }
+
+        .logo-text {
+          color: var(--navy-primary);
+        }
+
+        /* Desktop Navigation - CSS-Only Dropdowns (No Lag!) */
+        .nav-list {
+          display: flex;
+          align-items: center;
+          gap: 2rem;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .nav-item {
+          position: relative;
+        }
+
+        /* Dropdown Container - Always in DOM for Performance */
+        .dropdown {
+          position: relative;
+        }
+
+        .nav-button {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          font-size: var(--text-base);
+          font-weight: 600;
+          color: var(--navy-primary);
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0.5rem;
+          transition: color var(--transition-fast);
+          font-family: var(--font-primary);
+        }
+
+        .nav-button:hover {
+          color: var(--gold-accent);
+        }
+
+        .nav-link {
+          font-size: var(--text-base);
+          font-weight: 600;
+          color: var(--navy-primary);
+          padding: 0.5rem;
+          text-decoration: none;
+          transition: color var(--transition-fast);
+        }
+
+        .nav-link:hover {
+          color: var(--gold-accent);
+        }
+
+        /* Dropdown Menu - CSS-Only Hover (ZERO LAG!) */
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          margin-top: 0.5rem;
+          min-width: 280px;
+          background-color: var(--white);
+          border-radius: var(--radius-xl);
+          box-shadow: var(--shadow-2xl);
+          padding: var(--space-2);
+          border: 1px solid rgba(7, 32, 72, 0.08);
+
+          /* Performance Optimization - No React State! */
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(-10px);
+          transition: opacity var(--transition-fast),
+                      transform var(--transition-fast),
+                      visibility var(--transition-fast);
+          pointer-events: none;
+        }
+
+        /* Show dropdown on hover - Pure CSS */
+        .dropdown:hover .dropdown-menu {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+          pointer-events: auto;
+        }
+
+        .dropdown-item {
+          display: block;
+          padding: var(--space-3) var(--space-4);
+          font-size: var(--text-base);
+          font-weight: 500;
+          color: var(--navy-primary);
+          border-radius: var(--radius-lg);
+          transition: background-color var(--transition-fast),
+                      color var(--transition-fast);
+          text-decoration: none;
+        }
+
+        .dropdown-item:hover {
+          background-color: rgba(236, 165, 46, 0.1);
+          color: var(--navy-primary);
+        }
+
+        /* Mobile Menu Styles */
+        .mobile-menu {
+          padding-bottom: 1.5rem;
+        }
+
+        .mobile-menu-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .mobile-section {
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+          border-top: 1px solid var(--light-gray);
+        }
+
+        .mobile-section-header {
+          font-weight: 600;
+          color: var(--gray);
+          font-size: var(--text-sm);
+          padding: 0.5rem 0;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .mobile-link {
+          display: block;
+          padding: 0.75rem 0;
+          color: var(--navy-primary);
+          text-decoration: none;
+          font-size: var(--text-base);
+          font-weight: 500;
+          transition: color var(--transition-fast);
+        }
+
+        .mobile-link:hover {
+          color: var(--gold-accent);
+        }
+
+        .mobile-link-indent {
+          padding-left: 1rem;
+        }
+
+        .mobile-link-main {
+          border-top: 1px solid var(--light-gray);
+          font-weight: 600;
+        }
+
+        .mobile-cta {
+          margin-top: 1rem;
+          width: 100%;
+          text-align: center;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+          padding: 0.5rem;
+          background: none;
+          border: none;
+          cursor: pointer;
+          color: var(--navy-primary);
+          transition: color var(--transition-fast);
+        }
+
+        .mobile-menu-btn:hover {
+          color: var(--gold-accent);
+        }
+
+        /* Responsive Breakpoints */
         @media (min-width: 1024px) {
           .desktop-nav {
             display: flex !important;
