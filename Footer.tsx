@@ -250,22 +250,24 @@ export function Footer() {
             <p className="text-secondary text-sm">
               © 2025 Cynea AI. All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm">
+            <div className="flex items-center gap-4 text-xs">
               <Link
                 to="/legal/privacy-policy"
-                className="text-secondary hover:text-cyber-blue transition-colors duration-300"
+                className="text-secondary opacity-60 hover:opacity-100 hover:text-cyan-400 transition-all duration-300"
               >
-                Privacy Policy
+                Privacy
               </Link>
+              <span className="text-secondary opacity-30">•</span>
               <Link
                 to="/legal/terms-of-service"
-                className="text-secondary hover:text-cyber-blue transition-colors duration-300"
+                className="text-secondary opacity-60 hover:opacity-100 hover:text-cyan-400 transition-all duration-300"
               >
-                Terms of Service
+                Terms
               </Link>
+              <span className="text-secondary opacity-30">•</span>
               <Link
                 to="/legal/accessibility-statement"
-                className="text-secondary hover:text-cyber-blue transition-colors duration-300"
+                className="text-secondary opacity-60 hover:opacity-100 hover:text-cyan-400 transition-all duration-300"
               >
                 Accessibility
               </Link>
