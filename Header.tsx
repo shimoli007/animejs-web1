@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
-import anime from 'animejs';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,36 +14,6 @@ export function Header() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    // Navbar entrance animation
-    anime({
-      targets: '.nav-logo',
-      translateY: [-20, 0],
-      opacity: [0, 1],
-      duration: 600,
-      easing: 'easeOutExpo',
-      delay: 200
-    });
-
-    anime({
-      targets: '.nav-links > *',
-      translateY: [-20, 0],
-      opacity: [0, 1],
-      duration: 600,
-      delay: anime.stagger(50, { start: 400 }),
-      easing: 'easeOutExpo'
-    });
-
-    anime({
-      targets: '.nav-cta',
-      scale: [0.8, 1],
-      opacity: [0, 1],
-      duration: 600,
-      delay: 800,
-      easing: 'easeOutBack'
-    });
   }, []);
 
   const productsMenu = [
@@ -66,305 +35,484 @@ export function Header() {
   ];
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-deep-night bg-opacity-70 backdrop-blur-lg border-b border-glass shadow-glow-sm'
-          : 'bg-transparent'
-      }`}
-    >
-      <nav className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link to="/" className="nav-logo flex items-center space-x-3 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-cyber flex items-center justify-center font-mono font-bold text-lg shadow-glow-sm group-hover:shadow-glow transition-all duration-300">
-              C
-            </div>
-            <span className="font-mono text-xl font-bold text-primary group-hover:text-cyber-blue transition-colors duration-300">
-              Cynea AI
-            </span>
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8 nav-links">
-            {/* Products Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setActiveDropdown('products')}
-              onMouseLeave={() => setActiveDropdown(null)}
+    <>
+      <header
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          backgroundColor: 'var(--white)',
+          boxShadow: isScrolled ? 'var(--shadow-md)' : 'none',
+          transition: 'box-shadow var(--transition-base)',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.05)'
+        }}
+      >
+        <div className="container">
+          <nav style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.25rem 0' }}>
+            {/* Logo */}
+            <Link
+              to="/"
+              style={{
+                fontSize: '1.5rem',
+                fontWeight: '800',
+                color: 'var(--navy-dark)',
+                textDecoration: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.625rem'
+              }}
             >
-              <button className="flex items-center space-x-1 text-primary hover:text-cyber-blue transition-colors duration-300 font-medium">
-                <span>Products</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              {activeDropdown === 'products' && (
-                <div className="absolute top-full left-0 mt-2 w-64 glass-card border-glass shadow-glow-md animate-dropdown">
+              <span style={{
+                background: 'var(--teal)',
+                color: 'white',
+                padding: '0.5rem 0.875rem',
+                borderRadius: 'var(--radius-md)',
+                fontWeight: '800',
+                lineHeight: 1
+              }}>
+                C
+              </span>
+              <span>Cynea AI</span>
+            </Link>
+
+            {/* Desktop Navigation */}
+            <ul
+              className="desktop-nav"
+              style={{
+                display: 'none',
+                alignItems: 'center',
+                gap: '2rem',
+                listStyle: 'none',
+                margin: 0,
+                padding: 0
+              }}
+            >
+              {/* Products Dropdown */}
+              <li
+                style={{ position: 'relative' }}
+                onMouseEnter={() => setActiveDropdown('products')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    fontSize: 'var(--text-base)',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0.5rem',
+                    transition: 'color var(--transition-fast)'
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
+                >
+                  Products
+                  <ChevronDown size={16} />
+                </button>
+                {activeDropdown === 'products' && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      marginTop: '0.5rem',
+                      minWidth: '280px',
+                      backgroundColor: 'white',
+                      borderRadius: 'var(--radius-lg)',
+                      boxShadow: 'var(--shadow-xl)',
+                      padding: '0.5rem',
+                      border: '1px solid rgba(0, 0, 0, 0.05)'
+                    }}
+                  >
+                    {productsMenu.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        style={{
+                          display: 'block',
+                          padding: '0.75rem 1rem',
+                          fontSize: 'var(--text-base)',
+                          color: 'var(--navy-dark)',
+                          borderRadius: 'var(--radius-md)',
+                          transition: 'background-color var(--transition-fast)',
+                          textDecoration: 'none'
+                        }}
+                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--light-gray)')}
+                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* AI Training Dropdown */}
+              <li
+                style={{ position: 'relative' }}
+                onMouseEnter={() => setActiveDropdown('training')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    fontSize: 'var(--text-base)',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0.5rem',
+                    transition: 'color var(--transition-fast)'
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
+                >
+                  AI Training
+                  <ChevronDown size={16} />
+                </button>
+                {activeDropdown === 'training' && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      marginTop: '0.5rem',
+                      minWidth: '260px',
+                      backgroundColor: 'white',
+                      borderRadius: 'var(--radius-lg)',
+                      boxShadow: 'var(--shadow-xl)',
+                      padding: '0.5rem',
+                      border: '1px solid rgba(0, 0, 0, 0.05)'
+                    }}
+                  >
+                    {trainingMenu.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        style={{
+                          display: 'block',
+                          padding: '0.75rem 1rem',
+                          fontSize: 'var(--text-base)',
+                          color: 'var(--navy-dark)',
+                          borderRadius: 'var(--radius-md)',
+                          transition: 'background-color var(--transition-fast)',
+                          textDecoration: 'none'
+                        }}
+                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--light-gray)')}
+                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              {/* Impact Dropdown */}
+              <li
+                style={{ position: 'relative' }}
+                onMouseEnter={() => setActiveDropdown('impact')}
+                onMouseLeave={() => setActiveDropdown(null)}
+              >
+                <button
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.25rem',
+                    fontSize: 'var(--text-base)',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    padding: '0.5rem',
+                    transition: 'color var(--transition-fast)'
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
+                >
+                  Impact
+                  <ChevronDown size={16} />
+                </button>
+                {activeDropdown === 'impact' && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '100%',
+                      left: 0,
+                      marginTop: '0.5rem',
+                      minWidth: '200px',
+                      backgroundColor: 'white',
+                      borderRadius: 'var(--radius-lg)',
+                      boxShadow: 'var(--shadow-xl)',
+                      padding: '0.5rem',
+                      border: '1px solid rgba(0, 0, 0, 0.05)'
+                    }}
+                  >
+                    {impactMenu.map((item) => (
+                      <Link
+                        key={item.path}
+                        to={item.path}
+                        style={{
+                          display: 'block',
+                          padding: '0.75rem 1rem',
+                          fontSize: 'var(--text-base)',
+                          color: 'var(--navy-dark)',
+                          borderRadius: 'var(--radius-md)',
+                          transition: 'background-color var(--transition-fast)',
+                          textDecoration: 'none'
+                        }}
+                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = 'var(--light-gray)')}
+                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </li>
+
+              <li>
+                <Link
+                  to="/use-cases"
+                  style={{
+                    fontSize: 'var(--text-base)',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    padding: '0.5rem',
+                    textDecoration: 'none',
+                    transition: 'color var(--transition-fast)'
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
+                >
+                  Use Cases
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/resources"
+                  style={{
+                    fontSize: 'var(--text-base)',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    padding: '0.5rem',
+                    textDecoration: 'none',
+                    transition: 'color var(--transition-fast)'
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
+                >
+                  Resources
+                </Link>
+              </li>
+
+              <li>
+                <Link
+                  to="/about"
+                  style={{
+                    fontSize: 'var(--text-base)',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    padding: '0.5rem',
+                    textDecoration: 'none',
+                    transition: 'color var(--transition-fast)'
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = 'var(--teal)')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = 'var(--navy-dark)')}
+                >
+                  About
+                </Link>
+              </li>
+            </ul>
+
+            {/* CTA Button (Desktop) */}
+            <div className="desktop-nav">
+              <Link to="/contact" className="btn btn-primary">
+                Get Started
+              </Link>
+            </div>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="mobile-menu-btn"
+              style={{
+                display: 'block',
+                padding: '0.5rem',
+                background: 'none',
+                border: 'none',
+                cursor: 'pointer',
+                color: 'var(--navy-dark)'
+              }}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </nav>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="mobile-menu" style={{ paddingBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                <div style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', borderTop: '1px solid var(--light-gray)' }}>
+                  <div style={{ fontWeight: '600', color: 'var(--gray)', fontSize: 'var(--text-sm)', padding: '0.5rem 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Products
+                  </div>
                   {productsMenu.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
-                      className="block px-4 py-3 text-primary hover:text-cyber-blue hover:bg-glass-hover transition-all duration-300 rounded-lg"
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{
+                        display: 'block',
+                        padding: '0.75rem 0 0.75rem 1rem',
+                        color: 'var(--navy-dark)',
+                        textDecoration: 'none',
+                        fontSize: 'var(--text-base)'
+                      }}
                     >
                       {item.name}
                     </Link>
                   ))}
                 </div>
-              )}
-            </div>
 
-            {/* AI Training Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setActiveDropdown('training')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center space-x-1 text-primary hover:text-cyber-blue transition-colors duration-300 font-medium">
-                <span>AI Training</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              {activeDropdown === 'training' && (
-                <div className="absolute top-full left-0 mt-2 w-64 glass-card border-glass shadow-glow-md animate-dropdown">
+                <div style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', borderTop: '1px solid var(--light-gray)' }}>
+                  <div style={{ fontWeight: '600', color: 'var(--gray)', fontSize: 'var(--text-sm)', padding: '0.5rem 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    AI Training
+                  </div>
                   {trainingMenu.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
-                      className="block px-4 py-3 text-primary hover:text-cyber-blue hover:bg-glass-hover transition-all duration-300 rounded-lg"
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{
+                        display: 'block',
+                        padding: '0.75rem 0 0.75rem 1rem',
+                        color: 'var(--navy-dark)',
+                        textDecoration: 'none',
+                        fontSize: 'var(--text-base)'
+                      }}
                     >
                       {item.name}
                     </Link>
                   ))}
                 </div>
-              )}
-            </div>
 
-            {/* Impact Dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setActiveDropdown('impact')}
-              onMouseLeave={() => setActiveDropdown(null)}
-            >
-              <button className="flex items-center space-x-1 text-primary hover:text-cyber-blue transition-colors duration-300 font-medium">
-                <span>Impact</span>
-                <ChevronDown className="w-4 h-4" />
-              </button>
-              {activeDropdown === 'impact' && (
-                <div className="absolute top-full left-0 mt-2 w-64 glass-card border-glass shadow-glow-md animate-dropdown">
+                <div style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem', borderTop: '1px solid var(--light-gray)' }}>
+                  <div style={{ fontWeight: '600', color: 'var(--gray)', fontSize: 'var(--text-sm)', padding: '0.5rem 0', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Impact
+                  </div>
                   {impactMenu.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
-                      className="block px-4 py-3 text-primary hover:text-cyber-blue hover:bg-glass-hover transition-all duration-300 rounded-lg"
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{
+                        display: 'block',
+                        padding: '0.75rem 0 0.75rem 1rem',
+                        color: 'var(--navy-dark)',
+                        textDecoration: 'none',
+                        fontSize: 'var(--text-base)'
+                      }}
                     >
                       {item.name}
                     </Link>
                   ))}
                 </div>
-              )}
+
+                <Link
+                  to="/use-cases"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    display: 'block',
+                    padding: '0.75rem 0',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    textDecoration: 'none',
+                    borderTop: '1px solid var(--light-gray)',
+                    fontSize: 'var(--text-base)'
+                  }}
+                >
+                  Use Cases
+                </Link>
+
+                <Link
+                  to="/resources"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    display: 'block',
+                    padding: '0.75rem 0',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    textDecoration: 'none',
+                    fontSize: 'var(--text-base)'
+                  }}
+                >
+                  Resources
+                </Link>
+
+                <Link
+                  to="/about"
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    display: 'block',
+                    padding: '0.75rem 0',
+                    fontWeight: '500',
+                    color: 'var(--navy-dark)',
+                    textDecoration: 'none',
+                    fontSize: 'var(--text-base)'
+                  }}
+                >
+                  About
+                </Link>
+
+                <Link
+                  to="/contact"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="btn btn-primary"
+                  style={{ marginTop: '1rem', width: '100%', textAlign: 'center' }}
+                >
+                  Get Started
+                </Link>
+              </div>
             </div>
-
-            {/* Regular Links */}
-            <Link
-              to="/use-cases"
-              className="text-primary hover:text-cyber-blue transition-colors duration-300 font-medium"
-            >
-              Use Cases
-            </Link>
-
-            <Link
-              to="/about"
-              className="text-primary hover:text-cyber-blue transition-colors duration-300 font-medium"
-            >
-              About
-            </Link>
-
-            <Link
-              to="/resources"
-              className="text-primary hover:text-cyber-blue transition-colors duration-300 font-medium"
-            >
-              Resources
-            </Link>
-          </div>
-
-          {/* CTA Button - Desktop */}
-          <div className="hidden lg:block nav-cta">
-            <Link
-              to="/contact"
-              className="btn-cyber px-6 py-3 rounded-lg font-semibold shadow-glow-sm hover:shadow-glow transition-all duration-300"
-            >
-              Get Started
-            </Link>
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden text-primary hover:text-cyber-blue transition-colors duration-300"
-          >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          )}
         </div>
+      </header>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden mt-6 glass-card border-glass p-6 space-y-4 animate-dropdown">
-            {/* Products */}
-            <div className="space-y-2">
-              <div className="text-secondary text-sm font-mono font-semibold mb-2">Products</div>
-              {productsMenu.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-primary hover:text-cyber-blue transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-glass-hover"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* AI Training */}
-            <div className="space-y-2 pt-4 border-t border-glass">
-              <div className="text-secondary text-sm font-mono font-semibold mb-2">AI Training</div>
-              {trainingMenu.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-primary hover:text-cyber-blue transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-glass-hover"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* Impact */}
-            <div className="space-y-2 pt-4 border-t border-glass">
-              <div className="text-secondary text-sm font-mono font-semibold mb-2">Impact</div>
-              {impactMenu.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block text-primary hover:text-cyber-blue transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-glass-hover"
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </div>
-
-            {/* Other Links */}
-            <div className="space-y-2 pt-4 border-t border-glass">
-              <Link
-                to="/use-cases"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-primary hover:text-cyber-blue transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-glass-hover"
-              >
-                Use Cases
-              </Link>
-              <Link
-                to="/about"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-primary hover:text-cyber-blue transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-glass-hover"
-              >
-                About
-              </Link>
-              <Link
-                to="/resources"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-primary hover:text-cyber-blue transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-glass-hover"
-              >
-                Resources
-              </Link>
-            </div>
-
-            {/* Mobile CTA */}
-            <div className="pt-4 border-t border-glass">
-              <Link
-                to="/contact"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block w-full text-center btn-cyber px-6 py-3 rounded-lg font-semibold shadow-glow-sm"
-              >
-                Get Started
-              </Link>
-            </div>
-          </div>
-        )}
-      </nav>
+      {/* Spacer to prevent content from hiding under fixed header */}
+      <div style={{ height: '80px' }}></div>
 
       <style>{`
-        .animate-dropdown {
-          animation: dropdown-enter 0.3s ease-out;
-        }
-
-        @keyframes dropdown-enter {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
+        @media (min-width: 1024px) {
+          .desktop-nav {
+            display: flex !important;
           }
-          to {
-            opacity: 1;
-            transform: translateY(0);
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-menu {
+            display: none !important;
           }
         }
 
-        .shadow-glow-sm {
-          box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
-        }
-
-        .shadow-glow {
-          box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-        }
-
-        .shadow-glow-md {
-          box-shadow: 0 4px 20px rgba(0, 240, 255, 0.15);
-        }
-
-        .border-glass {
-          border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .bg-glass-hover {
-          background: rgba(0, 240, 255, 0.05);
-        }
-
-        .glass-card {
-          background: rgba(255, 255, 255, 0.03);
-          backdrop-filter: blur(12px);
-          border-radius: 0.75rem;
-        }
-
-        .btn-cyber {
-          background: linear-gradient(135deg, #00F0FF 0%, #7000FF 100%);
-          color: #ffffff;
-          border: 1px solid #00F0FF;
-        }
-
-        .btn-cyber:hover {
-          transform: translateY(-2px);
-        }
-
-        .text-primary {
-          color: #ffffff;
-        }
-
-        .text-secondary {
-          color: #8892b0;
-        }
-
-        .text-cyber-blue {
-          color: #00F0FF;
-        }
-
-        .bg-deep-night {
-          background-color: #050505;
-        }
-
-        .bg-gradient-cyber {
-          background: linear-gradient(135deg, #00F0FF 0%, #7000FF 100%);
+        @media (max-width: 1023px) {
+          .desktop-nav {
+            display: none !important;
+          }
         }
       `}</style>
-    </header>
+    </>
   );
 }
-
-export default Header;
