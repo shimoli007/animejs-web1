@@ -1,12 +1,13 @@
 {
   "name": "cynea-ai-website",
   "version": "1.0.0",
-  "description": "Cynea AI - Responsive website with AI & Blockchain solutions for SMEs",
-  "main": "index.html",
+  "description": "Cynea AI - Responsive website with AI & Blockchain solutions for SMEs featuring glassmorphism design",
+  "type": "module",
   "scripts": {
-    "dev": "npx live-server --port=3000 --open=index.html --watch=.",
-    "start": "npx http-server -p 3000 -o",
-    "serve": "python3 -m http.server 3000"
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "serve": "vite --host"
   },
   "keywords": [
     "cynea",
@@ -14,10 +15,24 @@
     "blockchain",
     "sme",
     "responsive",
-    "website"
+    "website",
+    "glassmorphism"
   ],
   "author": "Cynea AI",
   "license": "ISC",
-  "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "animejs": "^3.2.2",
+    "lucide-react": "^0.294.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.0"
+  },
+  "devDependencies": {
+    "@types/animejs": "^3.1.12",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8"
+  }
 }
