@@ -1,3 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deep-night: #050505;
+  --color-dark-navy: #0B0F19;
+  --color-glass: rgba(255, 255, 255, 0.03);
+  --color-glass-hover: rgba(255, 255, 255, 0.08);
+  --color-cyber-blue: #00F0FF;
+  --color-electric-violet: #7000FF;
+  --color-neon-pink: #FF006E;
+}
+
 /* ===========================
    CSS Reset & Base Styles
    =========================== */
