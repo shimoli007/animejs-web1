@@ -21,8 +21,8 @@ import { B2BTraining } from './training/B2BTraining';
 import { GovernmentPrograms } from './training/GovernmentPrograms';
 
 // Impact
-import { TalentHub } from './impact/TalentHub';
-import { AIForGood } from './impact/AIForGood';
+import TalentHub from './impact/TalentHub';
+import AIForGood from './impact/AIForGood';
 
 // Legal
 import { AccessibilityStatement } from './legal/AccessibilityStatement';
