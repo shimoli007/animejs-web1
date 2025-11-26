@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import anime from 'animejs';
 
 export function DigitalFinance() {
-  useEffect() => {
+  useEffect(() => {
     // Hero section entrance animation
     anime({
       targets: '.hero-badge',

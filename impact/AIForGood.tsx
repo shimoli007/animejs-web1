@@ -444,4 +444,4 @@ const AIForGood: React.FC = () => {
   );
 };
 
-export default AIForGood;
+export { AIForGood };

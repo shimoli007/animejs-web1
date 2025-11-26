@@ -404,4 +404,4 @@ const TalentHub: React.FC = () => {
   );
 };
 
-export default TalentHub;
+export { TalentHub };
